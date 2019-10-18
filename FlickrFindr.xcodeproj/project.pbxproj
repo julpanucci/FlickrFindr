@@ -12,6 +12,9 @@
 		B9203AC123591B000075B94B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC023591B000075B94B /* Assets.xcassets */; };
 		B9203AC423591B000075B94B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC223591B000075B94B /* LaunchScreen.storyboard */; };
 		B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203ACB23591C6F0075B94B /* SearchViewController.swift */; };
+		B9CA361B235956710047B46A /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361A235956710047B46A /* FlickrService.swift */; };
+		B9CA361F2359570B0047B46A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361E2359570B0047B46A /* Strings.swift */; };
+		B9FCD3522359598A00E090A6 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3512359598A00E090A6 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		B9203AC323591B000075B94B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9203AC523591B000075B94B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9203ACB23591C6F0075B94B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B9CA361A235956710047B46A /* FlickrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
+		B9CA361E2359570B0047B46A /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		B9FCD3512359598A00E090A6 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				B9203AB923591AFE0075B94B /* AppDelegate.swift */,
+				B9CA361E2359570B0047B46A /* Strings.swift */,
+				B9CA361A235956710047B46A /* FlickrService.swift */,
+				B9FCD3512359598A00E090A6 /* Photo.swift */,
 				B9203ACB23591C6F0075B94B /* SearchViewController.swift */,
 				B9203ABD23591AFE0075B94B /* Main.storyboard */,
 				B9203AC023591B000075B94B /* Assets.xcassets */,
@@ -137,6 +146,9 @@
 			files = (
 				B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */,
 				B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */,
+				B9CA361F2359570B0047B46A /* Strings.swift in Sources */,
+				B9CA361B235956710047B46A /* FlickrService.swift in Sources */,
+				B9FCD3522359598A00E090A6 /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
