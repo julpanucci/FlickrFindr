@@ -27,6 +27,10 @@ class SearchViewController: UIViewController {
         self.tableView.dataSource = self
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        FlickrSearchService.shared.fetchPhotosFrom(searchText: "cats")
+    }
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -35,7 +39,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        return UITableViewCell()
     }
     
     
