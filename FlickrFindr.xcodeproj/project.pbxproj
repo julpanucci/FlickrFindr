@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203AB923591AFE0075B94B /* AppDelegate.swift */; };
-		B9203ABC23591AFE0075B94B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203ABB23591AFE0075B94B /* ViewController.swift */; };
 		B9203ABF23591AFE0075B94B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9203ABD23591AFE0075B94B /* Main.storyboard */; };
 		B9203AC123591B000075B94B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC023591B000075B94B /* Assets.xcassets */; };
 		B9203AC423591B000075B94B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC223591B000075B94B /* LaunchScreen.storyboard */; };
+		B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203ACB23591C6F0075B94B /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B9203AB623591AFE0075B94B /* FlickrFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9203AB923591AFE0075B94B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B9203ABB23591AFE0075B94B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B9203ABE23591AFE0075B94B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9203AC023591B000075B94B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9203AC323591B000075B94B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9203AC523591B000075B94B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9203ACB23591C6F0075B94B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				B9203AB923591AFE0075B94B /* AppDelegate.swift */,
-				B9203ABB23591AFE0075B94B /* ViewController.swift */,
+				B9203ACB23591C6F0075B94B /* SearchViewController.swift */,
 				B9203ABD23591AFE0075B94B /* Main.storyboard */,
 				B9203AC023591B000075B94B /* Assets.xcassets */,
 				B9203AC223591B000075B94B /* LaunchScreen.storyboard */,
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9203ABC23591AFE0075B94B /* ViewController.swift in Sources */,
+				B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */,
 				B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,8 +282,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DGYJ3R2C9F;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -291,6 +291,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panucci.FlickrFindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,8 +301,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DGYJ3R2C9F;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -309,6 +310,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panucci.FlickrFindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
