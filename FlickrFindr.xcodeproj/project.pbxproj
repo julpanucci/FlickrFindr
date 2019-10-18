@@ -15,6 +15,8 @@
 		B9CA361B235956710047B46A /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361A235956710047B46A /* FlickrService.swift */; };
 		B9CA361F2359570B0047B46A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361E2359570B0047B46A /* Strings.swift */; };
 		B9FCD3522359598A00E090A6 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3512359598A00E090A6 /* Photo.swift */; };
+		B9FCD3542359F20700E090A6 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3532359F20700E090A6 /* PhotoCell.swift */; };
+		B9FCD3562359F6BA00E090A6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3552359F6BA00E090A6 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		B9CA361A235956710047B46A /* FlickrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		B9CA361E2359570B0047B46A /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B9FCD3512359598A00E090A6 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		B9FCD3532359F20700E090A6 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		B9FCD3552359F6BA00E090A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +65,11 @@
 			isa = PBXGroup;
 			children = (
 				B9203AB923591AFE0075B94B /* AppDelegate.swift */,
+				B9FCD3552359F6BA00E090A6 /* Colors.swift */,
 				B9CA361E2359570B0047B46A /* Strings.swift */,
 				B9CA361A235956710047B46A /* FlickrService.swift */,
 				B9FCD3512359598A00E090A6 /* Photo.swift */,
+				B9FCD3532359F20700E090A6 /* PhotoCell.swift */,
 				B9203ACB23591C6F0075B94B /* SearchViewController.swift */,
 				B9203ABD23591AFE0075B94B /* Main.storyboard */,
 				B9203AC023591B000075B94B /* Assets.xcassets */,
@@ -147,7 +153,9 @@
 				B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */,
 				B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */,
 				B9CA361F2359570B0047B46A /* Strings.swift in Sources */,
+				B9FCD3562359F6BA00E090A6 /* Colors.swift in Sources */,
 				B9CA361B235956710047B46A /* FlickrService.swift in Sources */,
+				B9FCD3542359F20700E090A6 /* PhotoCell.swift in Sources */,
 				B9FCD3522359598A00E090A6 /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,8 +302,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGYJ3R2C9F;
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -313,8 +322,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGYJ3R2C9F;
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
