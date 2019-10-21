@@ -14,10 +14,26 @@
 		B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203ACB23591C6F0075B94B /* SearchViewController.swift */; };
 		B9CA361B235956710047B46A /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361A235956710047B46A /* FlickrService.swift */; };
 		B9CA361F2359570B0047B46A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361E2359570B0047B46A /* Strings.swift */; };
+		B9E4AB31235E5AD2003D77EF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */; };
+		B9E4AB32235E5AD2003D77EF /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9FCD3522359598A00E090A6 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3512359598A00E090A6 /* Photo.swift */; };
 		B9FCD3542359F20700E090A6 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3532359F20700E090A6 /* PhotoCell.swift */; };
 		B9FCD3562359F6BA00E090A6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD3552359F6BA00E090A6 /* Colors.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B9E4AB33235E5AD2003D77EF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B9E4AB32235E5AD2003D77EF /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B9203AB623591AFE0075B94B /* FlickrFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +45,7 @@
 		B9203ACB23591C6F0075B94B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B9CA361A235956710047B46A /* FlickrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		B9CA361E2359570B0047B46A /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		B9FCD3512359598A00E090A6 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B9FCD3532359F20700E090A6 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		B9FCD3552359F6BA00E090A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -39,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9E4AB31235E5AD2003D77EF /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +68,7 @@
 			children = (
 				B9203AB823591AFE0075B94B /* FlickrFindr */,
 				B9203AB723591AFE0075B94B /* Products */,
+				B9E4AB2F235E5AD2003D77EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +98,14 @@
 			path = FlickrFindr;
 			sourceTree = "<group>";
 		};
+		B9E4AB2F235E5AD2003D77EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,6 +116,8 @@
 				B9203AB223591AFE0075B94B /* Sources */,
 				B9203AB323591AFE0075B94B /* Frameworks */,
 				B9203AB423591AFE0075B94B /* Resources */,
+				B9E4AB2E235E59D6003D77EF /* ShellScript */,
+				B9E4AB33235E5AD2003D77EF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +173,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B9E4AB2E235E59D6003D77EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B9203AB223591AFE0075B94B /* Sources */ = {
@@ -305,6 +355,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGYJ3R2C9F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -325,6 +379,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGYJ3R2C9F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FlickrFindr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

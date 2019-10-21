@@ -7,29 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PhotoCell: UITableViewCell {
     
     var photoView = UIImageView()
     var titleLabel = UILabel()
-    var photo: Photo? {
-        didSet {
-            if let photo = photo {
-                self.titleLabel.text = photo.title
-                
-                if let thumbnailURL = photo.thumbnailURL {
-                    URLSession.shared.dataTask(with: thumbnailURL) { (data, response, error) in
-                        if let data = data, let image = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                self.photoView.image = image
-                            }
-                        }
-                    }.resume()
-                }
-            }
-            
-        }
-    }
+    var photo: Photo?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,6 +40,10 @@ class PhotoCell: UITableViewCell {
         self.photoView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0).isActive = true
         self.photoView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         self.photoView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        if let url = photo?.thumbnailURL {
+            photoView.kf.setImage(with: url)
+        }
     }
     
     func setupTitleLabel() {
