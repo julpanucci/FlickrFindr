@@ -37,8 +37,8 @@ class Photo: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
-        case imageString = "url_o"
-        case thumbnailString = "url_t"
+        case imageString = "url_z"
+        case thumbnailString = "url_m"
     }
     
     var id: String?

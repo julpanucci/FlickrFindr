@@ -30,7 +30,7 @@ class FlickrSearchService {
     func fetchPhotosFrom(searchText: String, perpage: Int = 20, completion: @escaping ([Photo]?) -> Void) {
         var components = self.urlComponents
         components.queryItems?.append(URLQueryItem(name: "text", value: searchText))
-        components.queryItems?.append(URLQueryItem(name: "extras", value: "url_o,url_t"))
+        components.queryItems?.append(URLQueryItem(name: "extras", value: "url_m,url_z"))
         components.queryItems?.append(URLQueryItem(name: "format", value: "json"))
         components.queryItems?.append(URLQueryItem(name: "nojsoncallback", value: "1"))
         components.queryItems?.append(URLQueryItem(name: "per_page", value: "\(perpage)"))
