@@ -20,11 +20,14 @@ class FlickrSearchService {
         components.scheme = "https"
         components.host = "www.flickr.com"
         components.path = "/services/rest"
-        components.queryItems = [URLQueryItem(name: "method", value: "flickr.photos.search"), URLQueryItem(name: "api_key", value: Strings.Keys.flickr)]
+        components.queryItems = [URLQueryItem(name: "method", value: "flickr.photos.search"),
+                                 URLQueryItem(name: "api_key", value: Strings.Keys.flickr),
+                                 URLQueryItem(name: "sort", value: "relevance")]
+        
         return components
     }
     
-    func fetchPhotosFrom(searchText: String, perpage: Int = 20) {
+    func fetchPhotosFrom(searchText: String, perpage: Int = 20, completion: @escaping ([Photo]?) -> Void) {
         var components = self.urlComponents
         components.queryItems?.append(URLQueryItem(name: "text", value: searchText))
         components.queryItems?.append(URLQueryItem(name: "extras", value: "url_o,url_t"))
@@ -39,15 +42,13 @@ class FlickrSearchService {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data, let searchResponse = try? JSONDecoder().decode(FlickrSearchResponse.self, from: data) else {
                 return
-                }
-            
-            print(searchResponse)
-            if let photosResponse = searchResponse.photosResponse, let photos = photosResponse.photos {
-                for photo in photos {
-                    print(photo.title!)
-                }
             }
-            print(1)
+            
+            if let photosResponse = searchResponse.photosResponse, let photos = photosResponse.photos {
+                completion(photos)
+            } else {
+                completion(nil)
+            }
         }.resume()
     }
     
