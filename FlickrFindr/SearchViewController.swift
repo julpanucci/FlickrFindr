@@ -13,15 +13,43 @@ class SearchViewController: UIViewController {
     var tableView = UITableView()
     var photos = [Photo]()
     
+    var emptyView: UIView {
+        let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        emptyView.backgroundColor = Colors.orange
+        
+        let searchImage = UIImage(named: "search_2.png")
+        let imageView = UIImageView(image: searchImage)
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        imageView.center.y = view.center.y
+        imageView.center.x = view.center.x
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 30.0))
+        label.center.y = imageView.frame.maxY + 24.0
+        label.center.x = view.center.x
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textColor = .white
+        label.text = "No images"
+        
+        
+        emptyView.addSubview(imageView)
+        emptyView.addSubview(label)
+        return emptyView
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .blue
+        self.title = "FlickrFindr"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.setupTableView()
         self.setupSearchController()
-        self.navigationController?.navigationBar.barTintColor = Colors.blue
+        self.navigationController?.navigationBar.barTintColor = .orange
     }
     
     func setupSearchController() {
@@ -33,9 +61,10 @@ class SearchViewController: UIViewController {
         searchBar.barTintColor = UIColor.black
         searchBar.searchTextField.textColor = .black
         searchBar.searchTextField.backgroundColor = .white
-        tableView.tableHeaderView = searchBar
         searchBar.delegate = self
         searchBar.isTranslucent = true
+        
+        tableView.tableHeaderView = searchBar
     }
     
     func setupTableView() {
@@ -43,6 +72,8 @@ class SearchViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(PhotoCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.tableFooterView = UIView()
+        self.tableView.backgroundView = emptyView
         
         self.view.addSubview(tableView)
     }
@@ -58,7 +89,6 @@ extension SearchViewController: UITableViewDataSource {
         return self.photos.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let photoCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell {
             let photo = photos[indexPath.row]
@@ -69,8 +99,6 @@ extension SearchViewController: UITableViewDataSource {
         
         return UITableViewCell()
     }
-    
-    
 }
 
 extension SearchViewController: UITableViewDelegate {
