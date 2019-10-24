@@ -39,10 +39,12 @@ class Photo: Decodable {
         case title = "title"
         case imageString = "url_z"
         case thumbnailString = "url_m"
+        case owner = "owner_name"
     }
     
     var id: String?
     var title: String?
+    var owner: String?
     private var imageString: String?
     private var thumbnailString: String?
     
