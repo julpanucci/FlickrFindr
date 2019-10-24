@@ -19,6 +19,7 @@
 		B976D5292360805D00A1F1BA /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B976D5282360805D00A1F1BA /* PhotoCollectionCell.swift */; };
 		B98A187F236128BD006DB887 /* UITextfield+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98A187E236128BD006DB887 /* UITextfield+extensions.swift */; };
 		B98A188123613063006DB887 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B98A188023613063006DB887 /* no_image.png */; };
+		B98A188323622500006DB887 /* UINavigationController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98A188223622500006DB887 /* UINavigationController+extensions.swift */; };
 		B9CA361B235956710047B46A /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361A235956710047B46A /* FlickrService.swift */; };
 		B9CA361F2359570B0047B46A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA361E2359570B0047B46A /* Strings.swift */; };
 		B9E4AB31235E5AD2003D77EF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */; };
@@ -56,6 +57,7 @@
 		B976D5282360805D00A1F1BA /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
 		B98A187E236128BD006DB887 /* UITextfield+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+extensions.swift"; sourceTree = "<group>"; };
 		B98A188023613063006DB887 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
+		B98A188223622500006DB887 /* UINavigationController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+extensions.swift"; sourceTree = "<group>"; };
 		B9CA361A235956710047B46A /* FlickrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		B9CA361E2359570B0047B46A /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B9E4AB30235E5AD2003D77EF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		B976D52423607FC600A1F1BA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B98A188223622500006DB887 /* UINavigationController+extensions.swift */,
 				B976D51E235FF40E00A1F1BA /* UIColor+extensions.swift */,
 				B98A187E236128BD006DB887 /* UITextfield+extensions.swift */,
 			);
@@ -271,6 +274,7 @@
 			files = (
 				B976D51B235E7CAE00A1F1BA /* PhotoDetailViewController.swift in Sources */,
 				B98A187F236128BD006DB887 /* UITextfield+extensions.swift in Sources */,
+				B98A188323622500006DB887 /* UINavigationController+extensions.swift in Sources */,
 				B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */,
 				B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */,
 				B9CA361F2359570B0047B46A /* Strings.swift in Sources */,
