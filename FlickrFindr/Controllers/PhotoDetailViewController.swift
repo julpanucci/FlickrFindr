@@ -38,21 +38,32 @@ class PhotoDetailViewController: UIViewController {
             imageView.kf.indicatorType = .image(imageData: data)
         }
         
-        imageView.kf.setImage(with: photo?.imageURL, options: [.transition(.fade(0.2))])
-        
-        imageView.kf.setImage(with: photo?.imageURL, placeholder: nil, options: nil, progressBlock: nil) { (result) in
-            switch result {
-            case .failure:
-                self.imageView.image = self.noImagePlaceholder
-            default:
-                break
-            }
-        }
+        self.fetchAndSetImage()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .black
+    }
+    
+    func fetchAndSetImage() {
+        if let url = photo?.imageURL {
+            imageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (result) in
+                switch result {
+                case .failure:
+                    let alert = UIAlertController(title: "Oops", message: "There was a problem fetching your image!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: { (action) in
+                        self.fetchAndSetImage()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                default:
+                    break
+                }
+            }
+        } else {
+            self.imageView.image = self.noImagePlaceholder
+        }
     }
 }
