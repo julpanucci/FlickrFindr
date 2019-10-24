@@ -12,23 +12,20 @@ class SearchViewController: UIViewController {
     
     var collectionView: UICollectionView!
     var searchField = UITextField()
-    var photos = [Photo]() {
-        didSet {
-            if self.photos.count != 0 {
-                DispatchQueue.main.async {
-                    self.collectionView.backgroundView = nil
-                }
-            }
-        }
-    }
+    var searchBarButtonItem = UIBarButtonItem()
+    var photos = [Photo]()
     var photosResponse: PhotosResponse?
     var page = 1
     let perPage = 25
     let searchService = FlickrSearchService.shared
     var searchText: String?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     var emptyView: UIView {
-        let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         emptyView.backgroundColor = Colors.orange
         
         let searchImage = UIImage(named: "search_2.png")
@@ -52,19 +49,33 @@ class SearchViewController: UIViewController {
         return emptyView
     }
     
+    var backgroundView: UIView {
+        let bg = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        let imageView = UIImageView(frame: bg.frame)
+        let image = UIImage(imageLiteralResourceName: "bg")
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        
+        bg.addSubview(imageView)
+        return bg
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupNavigationBar()
+        self.setupSearchField()
+        self.setupSearchButton()
+        self.setupCollectionView()
+    }
+    
+    func setupNavigationBar() {
         self.title = "Flickr Findr"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = .white
-        
-        self.setupSearchField()
-        self.setupCollectionView()
-        self.navigationController?.navigationBar.barTintColor = .orange
+        self.navigationController?.navigationBar.barTintColor = Colors.pink
     }
     
     func setupSearchField() {
@@ -76,11 +87,27 @@ class SearchViewController: UIViewController {
         searchField.addLeftPadding(padding: 8)
         searchField.clearButtonMode = .always
         searchField.autocorrectionType = .no
+        searchField.autocapitalizationType = .none
         searchField.placeholder = "Search for photos"
         searchField.delegate = self
+        searchField.returnKeyType = .search
+        searchField.addTarget(self, action: #selector(searchFieldDidChange), for: .editingChanged)
         
         let barButtonItem = UIBarButtonItem(customView: searchField)
         self.navigationItem.leftBarButtonItem = barButtonItem
+    }
+    
+    func setupSearchButton() {
+        let searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 32))
+        searchButton.layer.cornerRadius = 8.0
+        searchButton.addTarget(self, action: #selector(searchForPhotos), for: .touchUpInside)
+        searchButton.setImage(#imageLiteral(resourceName: "search_icon"), for: .normal)
+        searchButton.tintColor = .white
+        searchButton.isEnabled = false
+        
+        searchBarButtonItem = UIBarButtonItem(customView: searchButton)
+        searchBarButtonItem.isEnabled = false
+        self.navigationItem.rightBarButtonItem = searchBarButtonItem
     }
     
     func setupCollectionView() {
@@ -90,7 +117,7 @@ class SearchViewController: UIViewController {
         self.collectionView.dataSource = self
         self.collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "Cell")
         self.collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
-        self.collectionView.backgroundView = emptyView
+        self.collectionView.backgroundView = backgroundView
         
         self.view.addSubview(collectionView)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +152,27 @@ class SearchViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    @objc func searchForPhotos() {
+        self.searchText = searchField.text
+        self.fetchPhotos()
+        self.searchField.resignFirstResponder()
+    }
+}
+
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.searchForPhotos()
+        return true
+    }
+    
+    @objc func searchFieldDidChange() {
+        if let count = searchField.text?.count, count > 0 {
+            searchBarButtonItem.isEnabled = true
+        } else {
+            searchBarButtonItem.isEnabled = false
         }
     }
 }
@@ -180,14 +228,5 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-}
-
-extension SearchViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.searchText = textField.text
-        self.fetchPhotos()
-        self.searchField.resignFirstResponder()
-        return true
     }
 }
