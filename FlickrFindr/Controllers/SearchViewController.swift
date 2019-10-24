@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     var collectionView: UICollectionView!
     var searchField = UITextField()
     var searchBarButtonItem = UIBarButtonItem()
+    var label = UILabel()
+    var loadingSpinner = UIActivityIndicatorView(style: .whiteLarge)
     var photos = [Photo]()
     var photosResponse: PhotosResponse?
     var page = 1
@@ -24,31 +26,6 @@ class SearchViewController: UIViewController {
         return .lightContent
     }
     
-    var emptyView: UIView {
-        let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        emptyView.backgroundColor = Colors.orange
-        
-        let searchImage = UIImage(named: "search_2.png")
-        let imageView = UIImageView(image: searchImage)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-        imageView.center.y = view.center.y
-        imageView.center.x = view.center.x
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 30.0))
-        label.center.y = imageView.frame.maxY + 24.0
-        label.center.x = view.center.x
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .white
-        label.text = "No images"
-        
-        
-        emptyView.addSubview(imageView)
-        emptyView.addSubview(label)
-        return emptyView
-    }
-    
     var backgroundView: UIView {
         let bg = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         let imageView = UIImageView(frame: bg.frame)
@@ -56,7 +33,24 @@ class SearchViewController: UIViewController {
         imageView.image = image
         imageView.contentMode = .scaleAspectFill
         
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 30.0))
+        label.center.y = view.center.y - label.frame.height - 16.0
+        label.center.x = view.center.x
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.textColor = .white
+        label.text = "Fetching images..."
+        label.isHidden = true
+        label.contentMode = .center
+        
+        loadingSpinner.center.x = view.center.x
+        loadingSpinner.center.y = view.center.y
+        loadingSpinner.stopAnimating()
+        
+        
         bg.addSubview(imageView)
+        bg.addSubview(label)
+        bg.addSubview(loadingSpinner)
         return bg
     }
     
@@ -127,7 +121,24 @@ class SearchViewController: UIViewController {
         self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
     }
     
+    func setIsLoading(isloading: Bool) {
+        if isloading {
+            if let searchText = searchField.text {
+                label.text = "Fetching images pertaining to \(searchText)"
+                label.sizeToFit()
+            }
+            label.isHidden = false
+            loadingSpinner.startAnimating()
+        } else {
+            label.isHidden = true
+            loadingSpinner.stopAnimating()
+        }
+    }
+    
     func fetchPhotos(forPage page: Int = 1) {
+        self.photos.removeAll()
+        self.collectionView.reloadData()
+        setIsLoading(isloading: true)
         if let searchText = self.searchText {
             searchService.fetchPhotosFrom(searchText: searchText, page: page, perpage: perPage) { (response) in
                 self.photosResponse = response
@@ -135,6 +146,7 @@ class SearchViewController: UIViewController {
                     self.photos = photos
                 }
                 DispatchQueue.main.async {
+                    self.setIsLoading(isloading: false)
                     self.collectionView.reloadData()
                 }
             }

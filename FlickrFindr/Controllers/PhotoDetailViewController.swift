@@ -33,6 +33,13 @@ class PhotoDetailViewController: UIViewController {
         
         self.view.addSubview(titleLabel)
         
+        let path = Bundle.main.path(forResource: "loading2", ofType: "gif")!
+        if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+            imageView.kf.indicatorType = .image(imageData: data)
+        }
+        
+        imageView.kf.setImage(with: photo?.imageURL, options: [.transition(.fade(0.2))])
+        
         imageView.kf.setImage(with: photo?.imageURL, placeholder: nil, options: nil, progressBlock: nil) { (result) in
             switch result {
             case .failure:
@@ -46,6 +53,6 @@ class PhotoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = Colors.pink
+        self.view.backgroundColor = .black
     }
 }
