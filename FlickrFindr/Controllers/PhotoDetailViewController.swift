@@ -52,7 +52,7 @@ class PhotoDetailViewController: UIViewController {
             imageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (result) in
                 switch result {
                 case .failure:
-                    let alert = UIAlertController(title: "Oops", message: "There was a problem fetching your image!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: Strings.Error.oopsTitle, message: Strings.Error.failedImageMessage, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: { (action) in
                         self.fetchAndSetImage()
                     }))

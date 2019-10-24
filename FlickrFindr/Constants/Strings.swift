@@ -14,4 +14,11 @@ struct Strings {
         static let flickr = "1508443e49213ff84d566777dc211f2a"
     }
     
+    struct Error {
+        static let oopsTitle = "Oops"
+        static let failedImageMessage = "There was a problem fetching your image! Would you like to try again?"
+    }
+    
+    
+    
 }
