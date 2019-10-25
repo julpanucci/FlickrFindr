@@ -26,37 +26,12 @@ class SearchViewController: UIViewController {
         return .lightContent
     }
     
-    var backgroundView: UIView {
-        let bg = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        let imageView = UIImageView(frame: bg.frame)
-        let image = UIImage(imageLiteralResourceName: "bg")
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFill
-        
-        label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 30.0))
-        label.center.y = view.center.y - label.frame.height - 16.0
-        label.center.x = view.center.x
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .white
-        label.text = "Fetching images..."
-        label.isHidden = true
-        label.contentMode = .center
-        
-        loadingSpinner.center.x = view.center.x
-        loadingSpinner.center.y = view.center.y
-        loadingSpinner.stopAnimating()
-        
-        
-        bg.addSubview(imageView)
-        bg.addSubview(label)
-        bg.addSubview(loadingSpinner)
-        return bg
-    }
+    var backgroundView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupBackgroundView()
         self.setupNavigationBar()
         self.setupSearchField()
         self.setupSearchButton()
@@ -70,6 +45,44 @@ class SearchViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = Colors.pink
+    }
+    
+    func setupBackgroundView() {
+        backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        self.view.addSubview(backgroundView)
+        
+        let imageView = UIImageView(frame: backgroundView.frame)
+        let image = UIImage(imageLiteralResourceName: "bg")
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 30.0))
+        label.center.y = view.center.y - label.frame.height - 16.0
+        label.center.x = view.center.x
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.textColor = .white
+        label.isHidden = true
+        label.contentMode = .center
+        label.adjustsFontSizeToFitWidth = true
+        
+        loadingSpinner.center.x = view.center.x
+        loadingSpinner.center.y = view.center.y
+        loadingSpinner.stopAnimating()
+        
+        backgroundView.addSubview(imageView)
+        backgroundView.addSubview(label)
+        backgroundView.addSubview(loadingSpinner)
+        
+        loadingSpinner.translatesAutoresizingMaskIntoConstraints = false
+        loadingSpinner.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+        loadingSpinner.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: backgroundView.bounds.width - 32).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        label.centerYAnchor.constraint(equalTo: loadingSpinner.centerYAnchor, constant: -50).isActive = true
+        label.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
     }
     
     func setupSearchField() {
@@ -112,6 +125,7 @@ class SearchViewController: UIViewController {
         self.collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "Cell")
         self.collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
         self.collectionView.backgroundView = backgroundView
+        self.view.bringSubviewToFront(collectionView)
         
         self.view.addSubview(collectionView)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +138,7 @@ class SearchViewController: UIViewController {
     func setIsLoading(isloading: Bool) {
         if isloading {
             if let searchText = searchField.text {
-                label.text = "Fetching images pertaining to \(searchText)"
+                label.text = "Fetching images about \(searchText)"
                 label.sizeToFit()
             }
             label.isHidden = false
