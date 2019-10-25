@@ -122,9 +122,11 @@ class SearchViewController: UIViewController {
         self.collectionView.backgroundColor = .orange
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "Cell")
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell0")
+        self.collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "Cell1")
         self.collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
         self.collectionView.backgroundView = backgroundView
+        self.collectionView.reloadData()
         self.view.bringSubviewToFront(collectionView)
         
         self.view.addSubview(collectionView)
@@ -205,25 +207,42 @@ extension SearchViewController: UITextFieldDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
         return self.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? PhotoCollectionCell {
-            let photo = self.photos[indexPath.row]
-            cell.photo = photo
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell0", for: indexPath)
+            cell.backgroundColor = Colors.pink
             return cell
         }
+        if indexPath.section == 1 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? PhotoCollectionCell {
+                      let photo = self.photos[indexPath.row]
+                      cell.photo = photo
+                      return cell
+                  }
+        }
+      
         return UICollectionViewCell()
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == photos.count - 1 {
-            page += 1
-            loadMore(atPage: page)
+        if indexPath.section == 1 {
+            if indexPath.row == photos.count - 1 {
+                  page += 1
+                  loadMore(atPage: page)
+              }
         }
     }
     
@@ -238,21 +257,18 @@ extension SearchViewController: UICollectionViewDelegate {
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize(width: view.bounds.width - 32, height: 50)
+        }
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: itemSize, height: itemSize)
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
