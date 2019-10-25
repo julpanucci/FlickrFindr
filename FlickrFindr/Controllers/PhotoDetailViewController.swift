@@ -19,10 +19,11 @@ class PhotoDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
-        let path = Bundle.main.path(forResource: "loading2", ofType: "gif")!
-        if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+        if let path = Bundle.main.path(forResource: "loading2", ofType: "gif"),
+            let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
             imageView.kf.indicatorType = .image(imageData: data)
         }
+
         return imageView
     }()
     var titleLabel: UILabel = {
@@ -33,6 +34,7 @@ class PhotoDetailViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     var ownerLabel: UILabel = {
@@ -52,7 +54,6 @@ class PhotoDetailViewController: UIViewController {
         self.view.addSubview(ownerLabel)
 
         self.setConstraints()
-        self.updateUI()
         self.fetchAndSetImage()
     }
 
@@ -103,6 +104,7 @@ class PhotoDetailViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 default:
+                    self.updateUI()
                     break
                 }
             }
