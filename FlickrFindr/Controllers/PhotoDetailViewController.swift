@@ -10,7 +10,8 @@ import UIKit
 import Kingfisher
 
 class PhotoDetailViewController: UIViewController {
-    
+
+    let noImagePlaceholder = UIImage(named: "no_image.png")
     var photo: Photo?
 
     var imageView: UIImageView = {
@@ -43,14 +44,25 @@ class PhotoDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let noImagePlaceholder = UIImage(named: "no_image.png")
+
     
     override func viewWillAppear(_ animated: Bool) {
-
         self.view.addSubview(imageView)
         self.view.addSubview(titleLabel)
         self.view.addSubview(ownerLabel)
 
+        self.setConstraints()
+        self.updateUI()
+        self.fetchAndSetImage()
+    }
+
+    override func viewDidLoad() {
+         super.viewDidLoad()
+
+         self.view.backgroundColor = .black
+     }
+
+    func setConstraints() {
         NSLayoutConstraint.activate([
             self.imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.imageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
@@ -67,7 +79,9 @@ class PhotoDetailViewController: UIViewController {
             ownerLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             ownerLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
 
+    func updateUI() {
         if let owner = photo?.owner {
             ownerLabel.text = "By: \(owner)"
         }
@@ -75,14 +89,6 @@ class PhotoDetailViewController: UIViewController {
         if let title = photo?.title {
             titleLabel.text = title
         }
-        self.fetchAndSetImage()
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = .black
     }
     
     func fetchAndSetImage() {
