@@ -28,6 +28,12 @@ class PhotoCollectionCell: UICollectionViewCell {
         setupTitleLabel()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
+        self.titleLabel.text = ""
+    }
+    
     func setupImageView() {
         self.imageView.backgroundColor = .blue
         self.imageView.kf.setImage(with: photo?.thumbnailURL, placeholder: placeHolder)
