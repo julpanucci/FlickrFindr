@@ -33,10 +33,28 @@ class SearchViewController: UIViewController {
         return label
     }()
     
+    var scrollToTopButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "scroll_up"), for: .normal)
+        button.isHidden = false
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     var backgroundView = UIView()
     
     var loadingSpinner = UIActivityIndicatorView(style: .whiteLarge)
-    var photos = [Photo]()
+    var photos = [Photo]() {
+        didSet {
+            DispatchQueue.main.async {
+                if self.photos.count > 0 {
+                    self.scrollToTopButton.isHidden = false
+                } else {
+                    self.scrollToTopButton.isHidden = true
+                }
+            }
+        }
+    }
     var photosResponse: PhotosResponse?
     var page = 1
     let perPage = 25
@@ -59,6 +77,11 @@ class SearchViewController: UIViewController {
         self.view.addSubview(collectionView)
         self.view.bringSubviewToFront(collectionView)
         
+        scrollToTopButton.addTarget(self, action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
+        scrollToTopButton.isHidden = true
+        self.view.addSubview(scrollToTopButton)
+        self.view.bringSubviewToFront(scrollToTopButton)
+        
         self.setConstraints()
     }
     
@@ -68,7 +91,18 @@ class SearchViewController: UIViewController {
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            
+            scrollToTopButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            scrollToTopButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: view.bounds.height / 2 - 50),
+            scrollToTopButton.heightAnchor.constraint(equalToConstant: 46),
+            scrollToTopButton.widthAnchor.constraint(equalToConstant: 46)
         ])
+    }
+    
+    @objc func scrollToTopButtonTapped() {
+        if self.photos.count > 0 {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -172,6 +206,21 @@ class SearchViewController: UIViewController {
     @objc func searchForPhotos() {
         self.fetchPhotos()
         self.view.endEditing(true)
+    }
+}
+
+extension SearchViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            UIView.animate(withDuration: 0.4) {
+                self.scrollToTopButton.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.4) {
+                self.scrollToTopButton.alpha = 0.0
+            }
+        }
     }
 }
 
