@@ -154,7 +154,7 @@ class SearchViewController: UIViewController {
     func setIsLoading(isloading: Bool) {
         if isloading {
             if let searchText = self.searchText {
-                descriptionLabel.text = "Fetching images about \(searchText)"
+                descriptionLabel.text = "Searching for images about \(searchText)"
                 descriptionLabel.sizeToFit()
             }
             descriptionLabel.isHidden = false
