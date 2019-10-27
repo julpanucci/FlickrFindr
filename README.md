@@ -31,3 +31,7 @@ To install cd into the project directory
 cd FlickrFindr
 carthage bootstrap
 ```
+
+
+## Dependencies Used
+[KingFisher](https://github.com/onevcat/Kingfisher)
