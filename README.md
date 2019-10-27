@@ -29,5 +29,5 @@ If you don't have Homebrew installed on machine run
 To install cd into the project directory
 ```
 cd FlickrFindr
-carthage --bootstrap
+carthage bootstrap
 ```
