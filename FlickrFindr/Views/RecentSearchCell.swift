@@ -23,6 +23,8 @@ class RecentSearchCell: UICollectionViewCell {
         return label
     }()
     
+    var color: UIColor?
+    
     var search: Search?
     
     override func layoutSubviews() {
@@ -31,12 +33,19 @@ class RecentSearchCell: UICollectionViewCell {
         self.layer.masksToBounds = true
         
         self.contentView.addSubview(searchLabel)
+
+        
+        self.contentView.bringSubviewToFront(searchLabel)
         self.setContraints()
-        self.updateUI()
+        
+        self.searchLabel.text = search?.searchText
+        self.contentView.backgroundColor = search?.color
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        self.searchLabel.text = nil
     }
     
     func setContraints() {
@@ -45,12 +54,7 @@ class RecentSearchCell: UICollectionViewCell {
             searchLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             searchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             searchLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            searchLabel.heightAnchor.constraint(equalToConstant: 18)
+            searchLabel.heightAnchor.constraint(equalToConstant: 18),
         ])
-    }
-    
-    func updateUI() {
-        self.contentView.backgroundColor = .random()
-        self.searchLabel.text = search?.searchText
     }
 }
