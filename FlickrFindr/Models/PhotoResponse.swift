@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class PhotosResponse: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case page = "page"
+        case pages = "pages"
+        case perpage = "perpage"
+        case total = "total"
+        case photos = "photo"
+    }
+    
+    var page: Int?
+    var pages: Int?
+    var perpage: Int?
+    var total: String?
+    var photos: [Photo]?
+}

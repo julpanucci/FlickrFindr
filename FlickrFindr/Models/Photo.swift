@@ -8,30 +8,7 @@
 
 import UIKit
 
-class FlickrSearchResponse: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case photosResponse = "photos"
-        case status = "stat"
-    }
-    var photosResponse: PhotosResponse?
-    var status: String?
-}
 
-class PhotosResponse: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case page = "page"
-        case pages = "pages"
-        case perpage = "perpage"
-        case total = "total"
-        case photos = "photo"
-    }
-    
-    var page: Int?
-    var pages: Int?
-    var perpage: Int?
-    var total: String?
-    var photos: [Photo]?
-}
 
 class Photo: Decodable {
     private enum CodingKeys: String, CodingKey {
@@ -63,15 +40,4 @@ class Photo: Decodable {
     }
 }
 
-@objc class Search: NSObject {
-    var searchText: String?
-    var imageURL: URL?
-    var color: UIColor?
-    
-    convenience init(searchText: String?, imageURL: URL?, color: UIColor? = .random()) {
-        self.init()
-        self.searchText = searchText
-        self.imageURL = imageURL
-        self.color = color
-    }
-}
+
