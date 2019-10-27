@@ -62,3 +62,9 @@ class Photo: Decodable {
         return nil
     }
 }
+
+struct Search {
+    
+    var searchText: String?
+    var imageURL: URL?
+}

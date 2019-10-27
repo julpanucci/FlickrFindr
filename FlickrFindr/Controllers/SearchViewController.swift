@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "PhotoCell")
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "SearchCell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.reloadData()
@@ -39,6 +40,11 @@ class SearchViewController: UIViewController {
         button.isHidden = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    lazy var recentSearchesController: RecentSearchesViewController = {
+        let viewController = RecentSearchesViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        return viewController
     }()
     
     var backgroundView = UIView()
@@ -180,6 +186,8 @@ class SearchViewController: UIViewController {
                 self.photosResponse = response
                 if let photos = self.photosResponse?.photos {
                     self.photos = photos
+                    
+                    RecentSearchesManager.shared.addNewSearch(search: Search(searchText: searchText, imageURL: photos.first?.thumbnailURL))
                 }
                 DispatchQueue.main.async {
                     self.setIsLoading(isloading: false)
@@ -235,11 +243,11 @@ extension SearchViewController: UITextFieldDelegate {
 extension SearchViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        if section == 0 || section == 1 {
             return 1
         }
         return self.photos.count
@@ -251,7 +259,7 @@ extension SearchViewController: UICollectionViewDataSource {
             cell.searchField.delegate = self
             return cell
         }
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCollectionCell {
                 let photo = self.photos[indexPath.row]
                 cell.photo = photo
@@ -259,13 +267,40 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
         
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = .orange
+        
+        let label = UILabel()
+        label.text = "Recent Searches"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        cell.contentView.addSubview(label)
+        cell.contentView.addSubview(recentSearchesController.collectionView)
+
+        recentSearchesController.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        recentSearchesController.collectionView.reloadData()
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4),
+            label.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 4),
+            label.widthAnchor.constraint(equalToConstant: cell.contentView.frame.width),
+            label.heightAnchor.constraint(equalToConstant: 18),
+            
+            recentSearchesController.collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: -4),
+            recentSearchesController.collectionView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4),
+            recentSearchesController.collectionView.heightAnchor.constraint(equalToConstant: 150),
+            recentSearchesController.collectionView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -4)
+        ])
+        return cell
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             if indexPath.row == photos.count - 1 {
                 page += 1
                 loadMore(atPage: page)
@@ -275,7 +310,7 @@ extension SearchViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let selectedPhoto = photos[indexPath.row]
             
             let photoDetailVC = PhotoDetailViewController()
@@ -289,9 +324,15 @@ extension SearchViewController: UICollectionViewDelegate {
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         if indexPath.section == 0 {
             return CGSize(width: view.bounds.width - 32, height: 100)
         }
+        
+        if indexPath.section == 1 {
+            return CGSize(width: view.bounds.width - 32, height: 150)
+        }
+        
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: itemSize, height: itemSize)
     }
