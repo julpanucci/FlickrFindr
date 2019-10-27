@@ -131,6 +131,7 @@
 				B9379DB72364B88800E3168C /* SearchCell.swift */,
 				B976D5282360805D00A1F1BA /* PhotoCollectionCell.swift */,
 				B9E2F41B2365F6F100C8926F /* RecentSearchCell.swift */,
+				B90CFB662365FE5F00F7B840 /* RecentSearchContainerCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 			children = (
 				B976D51A235E7CAE00A1F1BA /* PhotoDetailViewController.swift */,
 				B9203ACB23591C6F0075B94B /* SearchViewController.swift */,
-				B90CFB662365FE5F00F7B840 /* RecentSearchContainerCell.swift */,
 				B9379DBB2364F95F00E3168C /* RecentSearchesViewController.swift */,
 			);
 			path = Controllers;

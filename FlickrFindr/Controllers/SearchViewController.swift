@@ -42,6 +42,8 @@ class SearchViewController: UIViewController {
         return button
     }()
     
+    var searchField = UITextField()
+    
     var backgroundView = UIView()
     
     var loadingSpinner = UIActivityIndicatorView(style: .whiteLarge)
@@ -175,6 +177,7 @@ class SearchViewController: UIViewController {
     }
     
     private func clearPhotos() {
+        searchField.text = ""
         self.photos.removeAll()
         self.collectionView.reloadData()
     }
@@ -236,14 +239,6 @@ extension SearchViewController: UIScrollViewDelegate {
     }
 }
 
-extension SearchViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.searchText = textField.text
-        self.searchForPhotos()
-        return true
-    }
-}
-
 extension SearchViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -261,6 +256,7 @@ extension SearchViewController: UICollectionViewDataSource {
         if indexPath.section == 0 ,let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as? SearchCell {
             cell.titleLabel.text = "Flickr Findr"
             cell.searchField.delegate = self
+            searchField = cell.searchField
             return cell
         }
         if indexPath.section == 2 {
@@ -340,6 +336,12 @@ extension SearchViewController: RecentSearchesDelegate {
         self.searchText = search.searchText
         self.searchForPhotos()
     }
-    
-    
+}
+
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.searchText = textField.text
+        self.searchForPhotos()
+        return true
+    }
 }
