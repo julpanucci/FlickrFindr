@@ -10,6 +10,8 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
     
+    static let identifier = "SearchCell"
+    
     var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)

@@ -10,6 +10,9 @@ import UIKit
 
 class RecentSearchContainerCell: UICollectionViewCell {
     
+    
+    static let identifier = "RecentSearchContainerCell"
+    
     let manager = RecentSearchesManager.shared
     
     var label: UILabel = {

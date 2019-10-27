@@ -11,6 +11,8 @@ import Kingfisher
 
 class PhotoCollectionCell: UICollectionViewCell {
     
+    static let identifier = "PhotoCollectionCell"
+    
     var imageView: UIImageView = UIImageView()
     var titleLabel: UILabel = UILabel()
     var photo: Photo?

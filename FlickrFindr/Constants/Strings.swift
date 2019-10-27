@@ -19,6 +19,13 @@ struct Strings {
         static let failedImageMessage = "There was a problem fetching your image! Would you like to try again?"
     }
     
+    static let search = "Search"
+    static let searchDescription = "Searching for images about"
+    static let flickrFindrTitle = "Flickr Findr"
+    static let tryAgain = "Try Again"
+    static let dismiss = "Dismiss"
+    static let ownerLabel = "By:"
+    
     
     
 }

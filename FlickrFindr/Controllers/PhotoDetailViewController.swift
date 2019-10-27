@@ -67,10 +67,10 @@ class PhotoDetailViewController: UIViewController {
 
     func setConstraints() {
         NSLayoutConstraint.activate([
-            self.imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.imageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            self.imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
-            self.imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
+            imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+            imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
 
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
             titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 0),
@@ -86,7 +86,7 @@ class PhotoDetailViewController: UIViewController {
 
     func updateUI() {
         if let owner = photo?.owner {
-            ownerLabel.text = "By: \(owner)"
+            ownerLabel.text = "\(Strings.ownerLabel) \(owner)"
         }
 
         if let title = photo?.title {
@@ -100,10 +100,10 @@ class PhotoDetailViewController: UIViewController {
                 switch result {
                 case .failure:
                     let alert = UIAlertController(title: Strings.Error.oopsTitle, message: Strings.Error.failedImageMessage, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: { (action) in
+                    alert.addAction(UIAlertAction(title: Strings.tryAgain, style: .default, handler: { (action) in
                         self.fetchAndSetImage()
                     }))
-                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: Strings.dismiss, style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 default:
                     self.updateUI()

@@ -9,6 +9,9 @@
 import UIKit
 
 class RecentSearchCell: UICollectionViewCell {
+    
+    static let size: CGSize = CGSize(width: 75.0, height: 75.0)
+    
     var searchLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -29,7 +32,7 @@ class RecentSearchCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         
-        self.layer.cornerRadius = 8.0
+        self.layer.cornerRadius = self.frame.width / 2
         self.layer.masksToBounds = true
         
         self.contentView.addSubview(searchLabel)
@@ -54,7 +57,7 @@ class RecentSearchCell: UICollectionViewCell {
             searchLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             searchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             searchLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            searchLabel.heightAnchor.constraint(equalToConstant: 18),
+            searchLabel.heightAnchor.constraint(equalToConstant: 23),
         ])
     }
 }

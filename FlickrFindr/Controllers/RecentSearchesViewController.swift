@@ -17,29 +17,30 @@ class RecentSearchesViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        
         collectionView.reloadData()
     }
     
     override init(collectionViewLayout layout: UICollectionViewLayout) {
-         if let layout = layout as? UICollectionViewFlowLayout {
-             layout.scrollDirection = .horizontal
-             layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-             layout.minimumLineSpacing = 1.0
-             layout.minimumInteritemSpacing = 1.0
-         }
+        if let layout = layout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+            layout.minimumLineSpacing = 1.0
+            layout.minimumInteritemSpacing = 1.0
+        }
         
-         super.init(collectionViewLayout: layout)
+        super.init(collectionViewLayout: layout)
         
         self.collectionView.register(RecentSearchCell.self, forCellWithReuseIdentifier: identifier)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
         self.collectionView.backgroundColor = .clear
+        self.collectionView.showsHorizontalScrollIndicator = false
     }
     
     required init?(coder: NSCoder) {
         return nil
     }
-    
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -68,7 +69,7 @@ class RecentSearchesViewController: UICollectionViewController {
 
 extension RecentSearchesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return RecentSearchCell.size
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
