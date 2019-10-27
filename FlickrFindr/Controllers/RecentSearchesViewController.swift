@@ -34,7 +34,6 @@ class RecentSearchesViewController: UICollectionViewController {
         
         self.collectionView.register(RecentSearchCell.self, forCellWithReuseIdentifier: identifier)
         self.collectionView.backgroundColor = .clear
-        self.manager.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -60,12 +59,15 @@ class RecentSearchesViewController: UICollectionViewController {
         
         return UICollectionViewCell()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let search = self.recentSearches[indexPath.row]
+        manager.delegate?.searchWasSelected(search: search)
+    }
 }
 
 extension RecentSearchesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: 100, height: 100)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -83,6 +85,11 @@ extension RecentSearchesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension RecentSearchesViewController: RecentSearchesDelegate {
+    
+    func searchWasSelected(search: Search) {
+        // 
+    }
+    
     
     func searchesDidUpdate(searches: [Search]) {
         self.recentSearches = searches

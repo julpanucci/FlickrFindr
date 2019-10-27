@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: "PhotoCell")
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "SearchCell")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(RecentSearchContainerCell.self, forCellWithReuseIdentifier: "SearchContainerCell")
         collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.reloadData()
@@ -42,11 +42,6 @@ class SearchViewController: UIViewController {
         return button
     }()
     
-    lazy var recentSearchesController: RecentSearchesViewController = {
-        let viewController = RecentSearchesViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        return viewController
-    }()
-    
     var backgroundView = UIView()
     
     var loadingSpinner = UIActivityIndicatorView(style: .whiteLarge)
@@ -66,6 +61,8 @@ class SearchViewController: UIViewController {
     let perPage = 25
     let searchService = FlickrSearchService.shared
     var searchText: String?
+    
+    var recentSearchesManager = RecentSearchesManager.shared
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -87,6 +84,12 @@ class SearchViewController: UIViewController {
         scrollToTopButton.isHidden = true
         self.view.addSubview(scrollToTopButton)
         self.view.bringSubviewToFront(scrollToTopButton)
+        
+        if recentSearchesManager.delegate != nil {
+            recentSearchesManager.delegate?.add([self])
+        } else {
+            recentSearchesManager.delegate = MultiCastRecentSearchesDelegate([self])
+        }
         
         self.setConstraints()
     }
@@ -187,6 +190,7 @@ class SearchViewController: UIViewController {
                 if let photos = self.photosResponse?.photos {
                     self.photos = photos
                     
+                    
                     RecentSearchesManager.shared.addNewSearch(search: Search(searchText: searchText, imageURL: photos.first?.thumbnailURL))
                 }
                 DispatchQueue.main.async {
@@ -267,34 +271,11 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = .orange
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchContainerCell", for: indexPath) as? RecentSearchContainerCell {
+            return cell
+        }
         
-        let label = UILabel()
-        label.text = "Recent Searches"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        label.textColor = .white
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        cell.contentView.addSubview(label)
-        cell.contentView.addSubview(recentSearchesController.collectionView)
-
-        recentSearchesController.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        recentSearchesController.collectionView.reloadData()
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4),
-            label.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 4),
-            label.widthAnchor.constraint(equalToConstant: cell.contentView.frame.width),
-            label.heightAnchor.constraint(equalToConstant: 18),
-            
-            recentSearchesController.collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: -4),
-            recentSearchesController.collectionView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4),
-            recentSearchesController.collectionView.heightAnchor.constraint(equalToConstant: 150),
-            recentSearchesController.collectionView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -4)
-        ])
-        return cell
+        return UICollectionViewCell()
     }
 }
 
@@ -348,4 +329,17 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         
         return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
     }
+}
+
+extension SearchViewController: RecentSearchesDelegate {
+    func searchesDidUpdate(searches: [Search]) {
+        // Do nothing
+    }
+    
+    func searchWasSelected(search: Search) {
+        self.searchText = search.searchText
+        self.searchForPhotos()
+    }
+    
+    
 }
