@@ -2,13 +2,32 @@
 
 ## Installation
 
-clone the repo
-cd \*/FlickrFindr
+#### Clone Repo
 
-Make sure you have carthage installed
+```
+git clone https://github.com/julpanucci/FlickrFindr.git
+```
 
-If you do not you can install it through Homebrew
+### Carthage
+
+This project uses carthage for a few frameworks. In order for this project to run on your machine, you must have carthage installed.
+
+#### Homebrew
 
 ```
 brew install carthage
+```
+
+If you don't have Homebrew installed on machine run
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+to install
+
+
+#### Install dependencies
+To install cd into the project directory
+```
+cd FlickrFindr
+carthage --bootstrap
 ```
