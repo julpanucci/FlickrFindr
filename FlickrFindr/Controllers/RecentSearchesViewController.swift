@@ -85,12 +85,6 @@ extension RecentSearchesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension RecentSearchesViewController: RecentSearchesDelegate {
-    
-    func searchWasSelected(search: Search) {
-        // 
-    }
-    
-    
     func searchesDidUpdate(searches: [Search]) {
         self.recentSearches = searches
         DispatchQueue.main.async {
