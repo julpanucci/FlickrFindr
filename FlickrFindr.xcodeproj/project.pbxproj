@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B90CFB672365FE5F00F7B840 /* RecentSearchContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90CFB662365FE5F00F7B840 /* RecentSearchContainerCell.swift */; };
+		B913FA7E23662FD200F14AEE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913FA7D23662FD200F14AEE /* Search.swift */; };
+		B913FA802366302D00F14AEE /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913FA7F2366302D00F14AEE /* PhotoResponse.swift */; };
+		B913FA822366305600F14AEE /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913FA812366305600F14AEE /* FlickrSearchResponse.swift */; };
 		B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9203AB923591AFE0075B94B /* AppDelegate.swift */; };
 		B9203AC123591B000075B94B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC023591B000075B94B /* Assets.xcassets */; };
 		B9203AC423591B000075B94B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9203AC223591B000075B94B /* LaunchScreen.storyboard */; };
@@ -49,6 +52,9 @@
 
 /* Begin PBXFileReference section */
 		B90CFB662365FE5F00F7B840 /* RecentSearchContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecentSearchContainerCell.swift; path = FlickrFindr/Views/RecentSearchContainerCell.swift; sourceTree = SOURCE_ROOT; };
+		B913FA7D23662FD200F14AEE /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		B913FA7F2366302D00F14AEE /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		B913FA812366305600F14AEE /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
 		B9203AB623591AFE0075B94B /* FlickrFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9203AB923591AFE0075B94B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9203AC023591B000075B94B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +93,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B913FA7C23662F9600F14AEE /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				B98A188023613063006DB887 /* no_image.png */,
+				B976D518235E76D000A1F1BA /* search_2.png */,
+				B976D514235E66A200A1F1BA /* placeholder.png */,
+				B9203AC223591B000075B94B /* LaunchScreen.storyboard */,
+				B9379DB523623E7300E3168C /* loading2.gif */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		B9203AAD23591AFE0075B94B = {
 			isa = PBXGroup;
 			children = (
@@ -109,12 +127,8 @@
 			children = (
 				B9203AB923591AFE0075B94B /* AppDelegate.swift */,
 				B9203AC023591B000075B94B /* Assets.xcassets */,
-				B98A188023613063006DB887 /* no_image.png */,
-				B976D518235E76D000A1F1BA /* search_2.png */,
-				B976D514235E66A200A1F1BA /* placeholder.png */,
-				B9203AC223591B000075B94B /* LaunchScreen.storyboard */,
 				B9203AC523591B000075B94B /* Info.plist */,
-				B9379DB523623E7300E3168C /* loading2.gif */,
+				B913FA7C23662F9600F14AEE /* Supporting files */,
 				B976D52523607FE300A1F1BA /* Constants */,
 				B976D5272360801700A1F1BA /* Services */,
 				B976D52323607FBA00A1F1BA /* Models */,
@@ -140,6 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				B9FCD3512359598A00E090A6 /* Photo.swift */,
+				B913FA812366305600F14AEE /* FlickrSearchResponse.swift */,
+				B913FA7F2366302D00F14AEE /* PhotoResponse.swift */,
+				B913FA7D23662FD200F14AEE /* Search.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -291,10 +308,13 @@
 				B976D51B235E7CAE00A1F1BA /* PhotoDetailViewController.swift in Sources */,
 				B9379DBE2365ECD500E3168C /* RecentSearchesManager.swift in Sources */,
 				B9379DB82364B88800E3168C /* SearchCell.swift in Sources */,
+				B913FA7E23662FD200F14AEE /* Search.swift in Sources */,
 				B90CFB672365FE5F00F7B840 /* RecentSearchContainerCell.swift in Sources */,
 				B98A187F236128BD006DB887 /* UITextfield+extensions.swift in Sources */,
 				B98A188323622500006DB887 /* UINavigationController+extensions.swift in Sources */,
 				B9203ACC23591C6F0075B94B /* SearchViewController.swift in Sources */,
+				B913FA822366305600F14AEE /* FlickrSearchResponse.swift in Sources */,
+				B913FA802366302D00F14AEE /* PhotoResponse.swift in Sources */,
 				B9E2F41C2365F6F100C8926F /* RecentSearchCell.swift in Sources */,
 				B9203ABA23591AFE0075B94B /* AppDelegate.swift in Sources */,
 				B9CA361F2359570B0047B46A /* Strings.swift in Sources */,
