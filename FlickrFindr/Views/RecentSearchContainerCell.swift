@@ -12,7 +12,6 @@ class RecentSearchContainerCell: UICollectionViewCell {
     
     let manager = RecentSearchesManager.shared
     
-    
     var label: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -63,10 +62,6 @@ class RecentSearchContainerCell: UICollectionViewCell {
 }
 
 extension RecentSearchContainerCell: RecentSearchesDelegate {
-    func searchWasSelected(search: Search) {
-        // Do nothing
-    }
-    
     func searchesDidUpdate(searches: [Search]) {
         DispatchQueue.main.async {
             if searches.count > 0 {

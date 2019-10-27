@@ -12,7 +12,7 @@ class RecentSearchesManager {
     
     static let shared = RecentSearchesManager()
     
-    private var searches = [Search]()
+    var searches = [Search]()
     var delegate: MultiCastRecentSearchesDelegate?
     
     func addNewSearch(search: Search) {
@@ -23,13 +23,11 @@ class RecentSearchesManager {
             delegate?.searchesDidUpdate(searches: self.searches)
         }
     }
-    
-    
 }
 
-protocol RecentSearchesDelegate {
-    func searchesDidUpdate(searches: [Search])
-    func searchWasSelected(search: Search)
+@objc protocol RecentSearchesDelegate {
+    @objc optional func searchesDidUpdate(searches: [Search])
+    @objc optional func searchWasSelected(search: Search)
 }
 
 class MulticastDelegate<T> {
@@ -58,13 +56,13 @@ class MulticastDelegate<T> {
 class MultiCastRecentSearchesDelegate: RecentSearchesDelegate {
     func searchWasSelected(search: Search) {
         multicast.invoke { (delegate) in
-            delegate.searchWasSelected(search: search)
+            delegate.searchWasSelected?(search: search)
         }
     }
     
     func searchesDidUpdate(searches: [Search]) {
         multicast.invoke { (delegate) in
-            delegate.searchesDidUpdate(searches: searches)
+            delegate.searchesDidUpdate?(searches: searches)
         }
     }
 
