@@ -52,6 +52,8 @@ class PhotoDetailViewController: UIViewController {
         self.view.addSubview(imageView)
         self.view.addSubview(titleLabel)
         self.view.addSubview(ownerLabel)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
 
         self.setConstraints()
         self.fetchAndSetImage()
