@@ -10,9 +10,7 @@ import UIKit
 
 class RecentSearchContainerCell: UICollectionViewCell {
     
-    
     static let identifier = "RecentSearchContainerCell"
-    
     let manager = RecentSearchesManager.shared
     
     var label: UILabel = {
@@ -49,7 +47,6 @@ class RecentSearchContainerCell: UICollectionViewCell {
     }
     
     func setConstraints() {
-        
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
