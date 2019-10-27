@@ -56,7 +56,7 @@ class PhotoCollectionCell: UICollectionViewCell {
     func setupTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = .white
-        titleLabel.numberOfLines = 3
+        titleLabel.numberOfLines = 1
         titleLabel.sizeToFit()
         titleLabel.backgroundColor = .clear
         titleLabel.textAlignment = .left

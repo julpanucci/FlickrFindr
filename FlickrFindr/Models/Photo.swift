@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class Photo: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -39,5 +37,3 @@ class Photo: Decodable {
         return nil
     }
 }
-
-

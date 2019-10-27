@@ -27,7 +27,6 @@ class RecentSearchCell: UICollectionViewCell {
     }()
     
     var color: UIColor?
-    
     var search: Search?
     
     override func layoutSubviews() {
@@ -52,7 +51,6 @@ class RecentSearchCell: UICollectionViewCell {
     }
     
     func setContraints() {
-        
         NSLayoutConstraint.activate([
             searchLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             searchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
