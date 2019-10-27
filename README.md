@@ -22,7 +22,7 @@ If you don't have Homebrew installed on machine run
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-to install
+
 
 
 #### Install dependencies
