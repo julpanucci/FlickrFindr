@@ -20,7 +20,7 @@ class RecentSearchContainerCell: UICollectionViewCell {
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isHidden = true
-        label.text = "Recent Searches"
+        label.text = Strings.recentSearches
         return label
     }()
     

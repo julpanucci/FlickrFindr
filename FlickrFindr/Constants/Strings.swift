@@ -25,4 +25,5 @@ struct Strings {
     static let tryAgain = "Try Again"
     static let dismiss = "Dismiss"
     static let ownerLabel = "By:"
+    static let recentSearches = "Recent Searches"
 }
