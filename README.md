@@ -31,6 +31,8 @@ If you don't have Homebrew installed on your machine, you can install it by runn
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
+### Xcode
+Compiled using Xcode 11.1
 
 ## Dependencies Used
 [KingFisher](https://github.com/onevcat/Kingfisher)
