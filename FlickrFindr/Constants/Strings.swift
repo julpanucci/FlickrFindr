@@ -17,6 +17,7 @@ struct Strings {
     struct Error {
         static let oopsTitle = "Oops"
         static let failedImageMessage = "There was a problem fetching your image! Would you like to try again?"
+        static let failedFetchForImages = "Something went wrong fetching your images. Would you like to try again?"
     }
     
     static let search = "Search"

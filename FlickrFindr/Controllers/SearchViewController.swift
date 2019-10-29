@@ -214,8 +214,8 @@ class SearchViewController: UIViewController {
     }
     
     func failedToLoadImages() {
-        let alert = UIAlertController(title: Strings.Error.oopsTitle, message: "Something went wrong fetching your images.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        let alert = UIAlertController(title: Strings.Error.oopsTitle, message: Strings.Error.failedFetchForImages, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Strings.dismiss, style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: Strings.tryAgain, style: .default, handler: { (action) in
             self.fetchPhotos()
         }))

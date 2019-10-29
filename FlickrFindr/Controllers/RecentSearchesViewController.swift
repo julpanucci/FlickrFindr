@@ -94,5 +94,4 @@ extension RecentSearchesViewController: RecentSearchesDelegate {
             self.collectionView.reloadData()
         }
     }
-    
 }
