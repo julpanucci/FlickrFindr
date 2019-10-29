@@ -41,7 +41,6 @@ class RecentSearchCell: UICollectionViewCell {
         self.setContraints()
         
         self.searchLabel.text = search?.searchText
-        self.contentView.backgroundColor = search?.color
     }
     
     override func prepareForReuse() {

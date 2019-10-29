@@ -8,15 +8,13 @@
 
 import UIKit
 
-@objc class Search: NSObject {
+@objc class Search: NSObject, Codable {
     var searchText: String?
     var imageURL: URL?
-    var color: UIColor?
     
-    convenience init(searchText: String?, imageURL: URL?, color: UIColor? = .random()) {
+    convenience init(searchText: String?, imageURL: URL?) {
         self.init()
         self.searchText = searchText
         self.imageURL = imageURL
-        self.color = color
     }
 }

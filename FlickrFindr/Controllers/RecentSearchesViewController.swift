@@ -55,6 +55,8 @@ class RecentSearchesViewController: UICollectionViewController {
             
             let search = self.recentSearches[indexPath.row]
             cell.search = search
+            let color = Colors.randomColors[indexPath.row % Colors.randomColors.count]
+            cell.contentView.backgroundColor = color
             return cell
         }
         

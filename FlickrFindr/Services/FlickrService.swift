@@ -11,10 +11,6 @@ import Foundation
 class FlickrSearchService {
     static let shared = FlickrSearchService()
     
-    typealias json = [String: Any]
-    
-    let baseURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(Strings.Keys.flickr)&text=cats&extras=url_o%2Curl_t&per_page=20&format=json&nojsoncallback=1"
-    
     var urlComponents: URLComponents {
         var components = URLComponents()
         components.scheme = "https"
@@ -42,7 +38,8 @@ class FlickrSearchService {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data, let searchResponse = try? JSONDecoder().decode(FlickrSearchResponse.self, from: data) else {
-                return
+                completion(nil)
+                return 
             }
             
             if let photosResponse = searchResponse.photosResponse {

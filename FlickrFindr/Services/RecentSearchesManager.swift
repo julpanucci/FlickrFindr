@@ -31,13 +31,13 @@ class RecentSearchesManager {
 }
 
 class MulticastDelegate<T> {
-
+    
     private let delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
-
+    
     func add(_ delegate: T) {
         delegates.add(delegate as AnyObject)
     }
-
+    
     func remove(_ delegateToRemove: T) {
         for delegate in delegates.allObjects.reversed() {
             if delegate === delegateToRemove as AnyObject {
@@ -45,7 +45,7 @@ class MulticastDelegate<T> {
             }
         }
     }
-
+    
     func invoke(_ invocation: (T) -> Void) {
         for delegate in delegates.allObjects.reversed() {
             invocation(delegate as! T)
@@ -65,9 +65,9 @@ class MultiCastRecentSearchesDelegate: RecentSearchesDelegate {
             delegate.searchesDidUpdate?(searches: searches)
         }
     }
-
+    
     let multicast = MulticastDelegate<RecentSearchesDelegate>()
-
+    
     init(_ delegates: [RecentSearchesDelegate]) {
         delegates.forEach(multicast.add)
     }

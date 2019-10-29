@@ -68,7 +68,6 @@ class SearchViewController: UIViewController {
         self.setupCollectionView()
         self.setupBackgroundView()
         self.setupNavigationBar()
-        self.setupScrollButton()
         
         self.view.addSubview(backgroundView)
        
@@ -77,6 +76,7 @@ class SearchViewController: UIViewController {
         
         self.view.addSubview(scrollToTopButton)
         self.view.bringSubviewToFront(scrollToTopButton)
+        self.scrollToTopButton.addTarget(self, action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
         
         if recentSearchesManager.delegate != nil {
             recentSearchesManager.delegate?.add([self])
@@ -113,10 +113,6 @@ class SearchViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         self.navigationController?.navigationBar.tintColor = .white
-    }
-    
-    func setupScrollButton() {
-        scrollToTopButton.addTarget(self, action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
     }
     
     @objc func scrollToTopButtonTapped() {
@@ -189,6 +185,10 @@ class SearchViewController: UIViewController {
                 if let photos = response?.photos {
                     self.photos = photos
                     self.recentSearchesManager.addNewSearch(search: Search(searchText: searchText, imageURL: photos.first?.thumbnailURL))
+                } else {
+                    DispatchQueue.main.async {
+                        self.failedToLoadImages()
+                    }
                 }
                 
                 DispatchQueue.main.async {
@@ -211,6 +211,15 @@ class SearchViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func failedToLoadImages() {
+        let alert = UIAlertController(title: Strings.Error.oopsTitle, message: "Something went wrong fetching your images.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: Strings.tryAgain, style: .default, handler: { (action) in
+            self.fetchPhotos()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func searchForPhotos() {

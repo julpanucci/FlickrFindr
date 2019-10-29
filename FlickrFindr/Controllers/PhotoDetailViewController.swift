@@ -72,12 +72,12 @@ class PhotoDetailViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
 
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
+            titleLabel.bottomAnchor.constraint(equalTo: ownerLabel.topAnchor, constant: -8),
             titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 0),
             titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 0),
             titleLabel.heightAnchor.constraint(equalToConstant: 28),
 
-            ownerLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            ownerLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -32),
             ownerLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             ownerLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             ownerLabel.heightAnchor.constraint(equalToConstant: 20)
